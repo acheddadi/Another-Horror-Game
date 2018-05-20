@@ -23,7 +23,24 @@ GameObject:
   - component: {fileID: 95333912379357526}
   - component: {fileID: 108215535829838758}
   m_Layer: 0
-  m_Name: flame_sprite_0
+  m_Name: Flame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1321309986331326
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4907202684466736}
+  - component: {fileID: 33361510332349478}
+  - component: {fileID: 23452993728750414}
+  m_Layer: 0
+  m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,9 +107,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4838942407921048}
-  - component: {fileID: 33870132753052370}
-  - component: {fileID: 23657215239950370}
-  - component: {fileID: 136764960557888326}
   - component: {fileID: 143800003823766718}
   - component: {fileID: 114522874625821478}
   - component: {fileID: 114086657148356276}
@@ -142,6 +156,7 @@ Transform:
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 4991065543689500}
+  - {fileID: 4907202684466736}
   m_Father: {fileID: 4082854129498594}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 120.00001}
@@ -159,6 +174,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4907202684466736
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321309986331326}
+  m_LocalRotation: {x: -0.6110337, y: 0.284477, z: -0.7272675, w: -0.12958688}
+  m_LocalPosition: {x: -0.0416, y: 0.0385, z: 0.001}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 4566309941675936}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -214.9, y: -96.4, z: 11.19}
 --- !u!4 &4991065543689500
 Transform:
   m_ObjectHideFlags: 1
@@ -190,7 +218,7 @@ Camera:
     height: 1
   near clip plane: 0.04
   far clip plane: 100
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -208,12 +236,12 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!23 &23657215239950370
+--- !u!23 &23452993728750414
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655088339620740}
+  m_GameObject: {fileID: 1321309986331326}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -223,7 +251,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: a3bf6884023061248a86a93cc63f24b3, type: 2}
+  - {fileID: 2100000, guid: 8df669331ffaecd40b7366b88b356aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -285,13 +313,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1358248008695296}
   m_Mesh: {fileID: 4300000, guid: b08df80d33851b946a7ea7f8da1746ca, type: 3}
---- !u!33 &33870132753052370
+--- !u!33 &33361510332349478
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655088339620740}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 1321309986331326}
+  m_Mesh: {fileID: 4300000, guid: 3b3beeb49c0da1b4380c3fffbfdcd1ed, type: 3}
 --- !u!81 &81261375937377638
 AudioListener:
   m_ObjectHideFlags: 1
@@ -528,19 +556,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7167f3d179af1884f8cfec7f61322ab1, type: 3}
   - {fileID: 8300000, guid: 5804bf831746e1a4a9ac4605861e8077, type: 3}
   - {fileID: 8300000, guid: 081cfda5a2e39954c83bf799130b42ea, type: 3}
---- !u!136 &136764960557888326
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655088339620740}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &143800003823766718
 CharacterController:
   m_ObjectHideFlags: 1
