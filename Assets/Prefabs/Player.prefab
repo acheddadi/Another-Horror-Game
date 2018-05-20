@@ -556,6 +556,8 @@ MonoBehaviour:
   movementSpeed: 2
   runMultiplier: 1.5
   gravity: 9.8
+  distanceToInteractable: 1
+  interactionRadius: 0.25
 --- !u!143 &143117708098403246
 CharacterController:
   m_ObjectHideFlags: 1
