@@ -9,6 +9,7 @@ public class WalkWobble : MonoBehaviour
 	[SerializeField]private bool audibleFootsteps = false;
 	[SerializeField]private AudioClip[] footstepClips;
 	private PlayerController player;
+	private CharacterController character;
 	private AudioSource source;
 	private float spd, currentWobble = 0.0f;
 	private bool isWobbling = false;
