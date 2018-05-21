@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     {
         dialogue = new Queue<string>();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 	void Update()

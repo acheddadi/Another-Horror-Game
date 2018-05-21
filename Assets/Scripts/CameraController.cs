@@ -21,22 +21,24 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		float rSpd = rotationSpeed;
-		deltaX += Input.GetAxis("Mouse X") * rSpd;
-		deltaY -= Input.GetAxis("Mouse Y") * rSpd;
-		if (clampRotationAngle) deltaY = Mathf.Clamp(deltaY, -maxRotationAngle, maxRotationAngle);
-		
-		switch (rotationAxis)
-		{
-			case RotationDirection.X:
-			cameraPosition.localEulerAngles = new Vector3(0.0f, deltaX, 0.0f);
-			break;
-			case RotationDirection.Y:
-			cameraPosition.localEulerAngles = new Vector3(deltaY, 0.0f, 0.0f);
-			break;
-			case RotationDirection.XY:
-			cameraPosition.localEulerAngles = new Vector3(deltaY, deltaX, 0.0f);
-			break;
-		}
+        if (Time.timeScale > 0.0f)
+        {
+            float rSpd = rotationSpeed;
+            deltaX += Input.GetAxis("Mouse X") * rSpd;
+            deltaY -= Input.GetAxis("Mouse Y") * rSpd;
+            if (clampRotationAngle) deltaY = Mathf.Clamp(deltaY, -maxRotationAngle, maxRotationAngle);
+            switch (rotationAxis)
+            {
+                case RotationDirection.X:
+                    cameraPosition.localEulerAngles = new Vector3(0.0f, deltaX, 0.0f);
+                    break;
+                case RotationDirection.Y:
+                    cameraPosition.localEulerAngles = new Vector3(deltaY, 0.0f, 0.0f);
+                    break;
+                case RotationDirection.XY:
+                    cameraPosition.localEulerAngles = new Vector3(deltaY, deltaX, 0.0f);
+                    break;
+            }
+        }
 	}
 }
