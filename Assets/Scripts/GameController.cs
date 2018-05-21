@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public enum GameState { NORMAL, PAUSE, DIALOGUE, CUTSCENE }
-    private GameState currentState = GameState.NORMAL;
+    [SerializeField] private PauseScreen pause;
     private Queue<string> dialogue;
 	// Use this for initialization
     void Start()
@@ -16,19 +15,7 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey("escape"))Application.Quit();
-
-        switch (currentState)
-        {
-            case GameState.NORMAL:
-            break;
-            case GameState.PAUSE:
-            break;
-            case GameState.DIALOGUE:
-            break;
-            case GameState.CUTSCENE:
-            break;
-        }
+        if (Input.GetKeyDown("escape")) pause.gameObject.SetActive(true);
 	}
 
     public void PassDialogue(Dialogue pass)
@@ -37,7 +24,7 @@ public class GameController : MonoBehaviour
         {
             dialogue.Enqueue(pass.dialogue[i]);
         }
-        currentState = GameState.DIALOGUE;
+        NextDialogue();
     }
 
     public void NextDialogue()
@@ -45,10 +32,5 @@ public class GameController : MonoBehaviour
         string sentence = dialogue.Dequeue();
         Debug.Log(sentence);
         dialogue.Dequeue();
-    }
-
-    public GameState GetState()
-    {
-        return currentState;
     }
 }

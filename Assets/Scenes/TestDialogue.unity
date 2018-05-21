@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731725, g: 0.13414745, b: 0.12107873, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414739, b: 0.12107863, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -416,6 +416,12 @@ MonoBehaviour:
     dialogue:
     - A floating ball ...
     - Niam, excellent.
+--- !u!114 &1360456768 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114344116154269684, guid: 4276f11d424b8c844b69f8e44f8ee691,
+    type: 2}
+  m_PrefabInternal: {fileID: 626657756}
+  m_Script: {fileID: 11500000, guid: 96ce67da3cecb0f40b818614bdca6b43, type: 3}
 --- !u!1001 &1715378136
 Prefab:
   m_ObjectHideFlags: 0
@@ -497,6 +503,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114784279582804300, guid: 7e2f21c6a74015f4eaec209fc6846950,
+        type: 2}
+      propertyPath: pause
+      value: 
+      objectReference: {fileID: 1360456768}
     - target: {fileID: 1672935088126452, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
       propertyPath: m_Name
       value: Game Controller
