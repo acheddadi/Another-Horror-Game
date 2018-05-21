@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		float rSpd = rotationSpeed * Time.deltaTime * MULTIPLIER;
+		float rSpd = rotationSpeed;
 		deltaX += Input.GetAxis("Mouse X") * rSpd;
 		deltaY -= Input.GetAxis("Mouse Y") * rSpd;
 		if (clampRotationAngle) deltaY = Mathf.Clamp(deltaY, -maxRotationAngle, maxRotationAngle);
