@@ -5,33 +5,24 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private PauseScreen pause;
-    private Queue<string> dialogue;
+    [SerializeField]private TextScrolling textDisplay;
+    public static bool gameIsPaused = false;
 	// Use this for initialization
     void Start()
     {
-        dialogue = new Queue<string>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
 	void Update()
 	{
-        if (Input.GetKeyDown("escape")) pause.gameObject.SetActive(true);
+        if (gameIsPaused) Time.timeScale = 0.0f;
+        else Time.timeScale = 1.0f;
+        if (Input.GetKeyDown("escape") && !gameIsPaused) pause.gameObject.SetActive(true);
 	}
 
     public void PassDialogue(Dialogue pass)
     {
-        for (int i = 0; i < pass.dialogue.Length; i++)
-        {
-            dialogue.Enqueue(pass.dialogue[i]);
-        }
-        NextDialogue();
-    }
-
-    public void NextDialogue()
-    {
-        string sentence = dialogue.Dequeue();
-        Debug.Log(sentence);
-        dialogue.Dequeue();
+        textDisplay.DisplayDialogue(pass);
     }
 }

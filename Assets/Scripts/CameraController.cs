@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        if (Time.timeScale > 0.0f)
+        if (!GameController.gameIsPaused)
         {
             float rSpd = rotationSpeed;
             deltaX += Input.GetAxis("Mouse X") * rSpd;

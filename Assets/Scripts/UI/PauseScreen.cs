@@ -9,22 +9,22 @@ public class PauseScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        backgroundMusic.Pause();
+        backgroundMusic.volume = 0.25f;
         guiSFX.clip = pauseSFX;
         guiSFX.Play();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 0.0f;
+        GameController.gameIsPaused = true;
     }
 
     private void OnDisable()
     {
-        backgroundMusic.Play();
+        backgroundMusic.volume = 1.0f;
         guiSFX.clip = continueSFX;
         guiSFX.Play();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1.0f;
+        GameController.gameIsPaused = false;
     }
 
     public void Continue()

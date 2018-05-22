@@ -31,9 +31,8 @@ public class PlayerController : MonoBehaviour
 			if (interactable != null)
 			{
 				interactable.Highlight();
-				if (Input.GetMouseButtonDown(0)) interactable.ShowDialogue();
+				if (Input.GetMouseButtonDown(0) && !GameController.gameIsPaused) interactable.Interact();
 			}
-			
 		}
 
 		if (Input.GetKey(KeyCode.LeftShift)) isRunning = true;
