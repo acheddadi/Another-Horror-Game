@@ -6,11 +6,13 @@ public class CameraController : MonoBehaviour
 {
 	private Transform cameraPosition;
 	private float deltaX, deltaY;
-	private const int MULTIPLIER = 100;
 	[SerializeField]private bool clampRotationAngle = true;
 	[SerializeField]private float rotationSpeed = 3.0f, maxRotationAngle = 80.0f;
-	[SerializeField]private enum RotationDirection {X, Y, XY};
+	[SerializeField]private enum RotationDirection {X, Y, XY, NONE};
 	[SerializeField]private RotationDirection rotationAxis = RotationDirection.X;
+    private bool fps = false, dampedY = false;
+    private float dampYTimer;
+    private float velocity = 0.0f, smoothTime = 0.1f;
 
 	// Use this for initialization
 	void Start ()
@@ -38,7 +40,30 @@ public class CameraController : MonoBehaviour
                 case RotationDirection.XY:
                     cameraPosition.localEulerAngles = new Vector3(deltaY, deltaX, 0.0f);
                     break;
+                case RotationDirection.NONE:
+                    if (fps)
+                    {
+                        if (!dampedY)
+                        {
+                            cameraPosition.localEulerAngles = new Vector3(Mathf.SmoothDampAngle(cameraPosition.localEulerAngles.x, deltaY, ref velocity, smoothTime), 0.0f, 0.0f);
+                            dampYTimer += Time.deltaTime;
+                            if (dampYTimer > smoothTime * 2) dampedY = true;
+                        }
+                        else
+                        {
+                            cameraPosition.localEulerAngles = new Vector3(deltaY, 0.0f, 0.0f);
+                            dampYTimer = 0.0f;
+                        }
+                        if (!fps && dampedY) dampedY = false;
+                    }
+                    else cameraPosition.localEulerAngles = new Vector3(Mathf.SmoothDampAngle(cameraPosition.localEulerAngles.x, 0.0f, ref velocity, smoothTime), 0.0f, 0.0f);
+                    break;
             }
         }
 	}
+
+    public void FPS(bool f)
+    {
+        fps = f;
+    }
 }
