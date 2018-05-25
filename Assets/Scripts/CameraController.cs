@@ -47,13 +47,13 @@ public class CameraController : MonoBehaviour
                         {
                             cameraPosition.localEulerAngles = new Vector3(Mathf.SmoothDampAngle(cameraPosition.localEulerAngles.x, deltaY, ref velocity, smoothTime), 0.0f, 0.0f);
                             dampYTimer += Time.deltaTime;
-                            if (dampYTimer > smoothTime * 2) dampedY = true;
+                            if (dampYTimer > smoothTime * 2)
+                            {
+                                dampYTimer = 0.0f;
+                                dampedY = true;
+                            }
                         }
-                        else
-                        {
-                            cameraPosition.localEulerAngles = new Vector3(deltaY, 0.0f, 0.0f);
-                            dampYTimer = 0.0f;
-                        }
+                        else cameraPosition.localEulerAngles = new Vector3(deltaY, 0.0f, 0.0f);
                         if (!fps && dampedY) dampedY = false;
                     }
                     else cameraPosition.localEulerAngles = new Vector3(Mathf.SmoothDampAngle(cameraPosition.localEulerAngles.x, 0.0f, ref velocity, smoothTime), 0.0f, 0.0f);
