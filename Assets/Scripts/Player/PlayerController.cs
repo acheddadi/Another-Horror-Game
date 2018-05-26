@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	void Start ()
 	{
 		player = GetComponent<CharacterController>();
-		cam = GetComponentInChildren<Camera>();
+		cam = Camera.main;
 	}
 	
 	// Update is called once per frame

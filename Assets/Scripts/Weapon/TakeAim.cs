@@ -7,8 +7,9 @@ public class TakeAim : MonoBehaviour
 	[SerializeField]private float fireRate = 0.1f, recoilAmount = 1.0f;
 	private Animator anime;
 	private CameraController camRot;
-	private Camera camObj;
+	private Camera cam;
 	private AudioSource sfx;
+	private FireProjectile fireProjectile;
 	private float initZoom, velocity = 0.0f, smoothTime = 0.1f, lastShot = 0.0f;
 	private bool recoiling = false, letGo = true;
 	private int lastClick;
@@ -18,9 +19,10 @@ public class TakeAim : MonoBehaviour
 	{
 		anime = GetComponent<Animator>();
 		camRot = GetComponent<CameraController>();
-		camObj = FindObjectOfType<Camera>();
+		cam = Camera.main;
 		sfx = GetComponent<AudioSource>();
-		initZoom = camObj.fieldOfView;
+		fireProjectile = GetComponent<FireProjectile>();
+		initZoom = cam.fieldOfView;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +36,7 @@ public class TakeAim : MonoBehaviour
 			{
 				anime.SetBool("RightClick", true);
 				camRot.FPS(true);
-				camObj.fieldOfView = Mathf.SmoothDamp(camObj.fieldOfView, initZoom - 20, ref velocity, smoothTime);
+				cam.fieldOfView = Mathf.SmoothDamp(cam.fieldOfView, initZoom - 20, ref velocity, smoothTime);
 				
 				if (Input.GetMouseButton(0) && (lastShot > fireRate) && letGo)
 				{
@@ -42,6 +44,7 @@ public class TakeAim : MonoBehaviour
 					AnimatorStateInfo nextInfo = anime.GetNextAnimatorStateInfo(0);
 					if ((info.normalizedTime > 1.0f) && (nextInfo.normalizedTime == 0.0f) && (info.IsName("Base.PointGun")) && (lastClick == 0))
 					{
+						fireProjectile.Fire();
 						anime.SetTrigger("LeftClick");
 						StartCoroutine(RecoilCamera());
 						sfx.pitch = Random.Range(0.9f, 1.1f);
@@ -55,7 +58,7 @@ public class TakeAim : MonoBehaviour
 			{
 				anime.SetBool("RightClick", false);
 				camRot.FPS(false);
-				camObj.fieldOfView = Mathf.SmoothDamp(camObj.fieldOfView, initZoom, ref velocity, smoothTime);
+				cam.fieldOfView = Mathf.SmoothDamp(cam.fieldOfView, initZoom, ref velocity, smoothTime);
 			}
 			if (Input.GetMouseButtonUp(0)) letGo = true;
 			lastShot += Time.deltaTime;
@@ -67,20 +70,20 @@ public class TakeAim : MonoBehaviour
 		if (!recoiling)
 		{
 			recoiling = true;
-			Vector3 initRot = camObj.transform.localEulerAngles;
+			Vector3 initRot = cam.transform.localEulerAngles;
 			Vector3 rot = initRot;
 
 			while (rot.x < initRot.x + recoilAmount)
 			{
 				rot.x += 0.25f;
-				camObj.transform.localEulerAngles = rot;
+				cam.transform.localEulerAngles = rot;
 				yield return null;
 			}
 
 			while (rot.x > initRot.x)
 			{
 				rot.x -= 0.25f;
-				camObj.transform.localEulerAngles = rot;
+				cam.transform.localEulerAngles = rot;
 				yield return null;
 			}
 			recoiling = false;
