@@ -1,28 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class FPSDisplay : MonoBehaviour {
-
-  string label = "";
-	float count;
-	
-	IEnumerator Start ()
+ 
+public class FPSDisplay : MonoBehaviour
+{
+	float deltaTime = 0.0f;
+ 
+	void Update()
 	{
-		GUI.depth = 2;
-		while (true) {
-			if (Time.timeScale == 1) {
-				yield return new WaitForSeconds (0.1f);
-				count = (1 / Time.deltaTime);
-				label = "FPS :" + (Mathf.Round (count));
-			} else {
-				label = "Pause";
-			}
-			yield return new WaitForSeconds (0.5f);
-		}
+		deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 	}
-	
-	void OnGUI ()
+ 
+	void OnGUI()
 	{
-		GUI.Label (new Rect ((Screen.width / 2) - 20, 40, 100, 25), label);
+		int w = Screen.width, h = Screen.height;
+ 
+		GUIStyle style = new GUIStyle();
+ 
+		Rect rect = new Rect (w / 2, h / 16, 100, 25);
+		style.alignment = TextAnchor.UpperCenter;
+		style.fontSize = h * 5 / 100;
+		style.normal.textColor = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+		float msec = deltaTime * 1000.0f;
+		float fps = 1.0f / deltaTime;
+		string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
+		GUI.Label(rect, text, style);
 	}
 }

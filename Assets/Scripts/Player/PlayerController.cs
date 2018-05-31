@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 			if (interactable != null)
 			{
 				interactable.Highlight();
-				if (Input.GetMouseButtonDown(0) && !GameController.gameIsPaused) interactable.Interact();
+				if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1) && !GameController.gameIsPaused) interactable.Interact();
 			}
 		}
 

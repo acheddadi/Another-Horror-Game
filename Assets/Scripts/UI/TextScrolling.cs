@@ -51,7 +51,6 @@ public class TextScrolling : MonoBehaviour
 	{
 		displayingText = true;
 		foreach (string i in text.dialogue) paragraph.Enqueue(i);
-		NextSentence();
 	}
 
 	public void NextSentence()
@@ -60,6 +59,7 @@ public class TextScrolling : MonoBehaviour
 		{
 			scrollSentence = string.Empty;
 			fullSentence = paragraph.Dequeue();
+			Debug.Log(fullSentence);
 			doneScrolling = false;
 		}
 		else
