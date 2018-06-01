@@ -8,22 +8,25 @@ public class FireProjectile : MonoBehaviour
 	[SerializeField]private Transform ironSight;
 	[SerializeField]private float bulletForce = 3.0f;
 	private Camera cam;
-	private LayerMask mask;
 
 	void Start()
 	{
 		cam = Camera.main;
-		mask = LayerMask.GetMask("Default");
 	}
 
 	public void Fire()
 	{
 		RaycastHit info;
 		Ray ray = cam.ViewportPointToRay(cam.WorldToViewportPoint(ironSight.position));
-		if (Physics.Raycast(ray, out info,float.PositiveInfinity, mask))
+		if (Physics.Raycast(ray, out info,float.PositiveInfinity))
 		{
 			GameObject toInstantiate;
-			if (info.transform.GetComponent<EnemyTag>()) toInstantiate = bloodSplat;
+			if (info.transform.GetComponentInParent<EnemyController>())
+			{
+				toInstantiate = bloodSplat;
+				EnemyController enemy = info.transform.GetComponentInParent<EnemyController>();
+				enemy.TakeDamage();
+			}
 			else toInstantiate = bulletDust;
 
         	GameObject obj = Instantiate(toInstantiate, info.point, Quaternion.LookRotation(info.normal));
