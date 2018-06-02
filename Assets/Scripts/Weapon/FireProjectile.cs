@@ -41,7 +41,7 @@ public class FireProjectile : MonoBehaviour
 			if (info.transform.GetComponent<Rigidbody>() != null)
 			{
 				Rigidbody rb = info.transform.GetComponent<Rigidbody>();
-				rb.AddForce(ray.direction * bulletForce);
+				StartCoroutine(KnockBack(rb, ray));
 			}
 		}
 		EnemyController[] enemyHeard = FindObjectsOfType<EnemyController>();
@@ -50,5 +50,11 @@ public class FireProjectile : MonoBehaviour
 			Collider collider = GetComponent<Collider>();
 			if (collider.bounds.Contains(enemy.transform.position)) enemy.Attract(transform.position);
 		}
+	}
+
+	private IEnumerator KnockBack(Rigidbody rb, Ray ray)
+	{
+		yield return new WaitForEndOfFrame();
+		rb.AddForce(ray.direction * bulletForce);
 	}
 }

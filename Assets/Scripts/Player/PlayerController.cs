@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 		else spd = movementSpeed;
 
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-		movement = transform.TransformDirection(movement);
+		movement = transform.TransformDirection(movement.normalized);
 		movement *= spd * Time.deltaTime;
 		if (enableGravity) movement.y -= gravity * Time.deltaTime;
 		player.Move(movement);

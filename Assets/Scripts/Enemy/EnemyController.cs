@@ -63,6 +63,7 @@ public class EnemyController : MonoBehaviour
 				ref velocity2, smoothTime
 			);
 			anime.SetFloat("Speed", animSpd);
+			timer -= Time.deltaTime;
 		}
 
 		if ((nav.destination - transform.position).magnitude <= nav.stoppingDistance) isRunning = false;
@@ -70,7 +71,6 @@ public class EnemyController : MonoBehaviour
 		anime.SetBool("isRunning", isRunning);
 		nav.speed = Mathf.SmoothDamp(nav.speed, speed, ref velocity, smoothTime);
 		nav.acceleration = accel;
-		timer -= Time.deltaTime;
 	}
 
 	void OnTriggerStay(Collider other)
