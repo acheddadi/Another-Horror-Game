@@ -125,6 +125,8 @@ ModelImporter:
     400118: upper_arm.R
     2000000: Camera
     2100000: zombie
+    2300000: new_thin_zombie
+    3300000: new_thin_zombie
     4300000: new_thin_zombie
     7400000: Armature|attack1_l
     7400002: Armature|attack1_r
@@ -144,6 +146,7 @@ ModelImporter:
     7400030: Armature|walk
     7400032: Armature|walk2
     9500000: //RootNode
+    11100000: //RootNode
     13700000: new_thin_zombie
     2186277476908879412: ImportLogs
   externalObjects: {}

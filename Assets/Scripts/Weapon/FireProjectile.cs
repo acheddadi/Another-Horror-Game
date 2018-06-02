@@ -7,6 +7,7 @@ public class FireProjectile : MonoBehaviour
 	[SerializeField]private GameObject bulletDust, bloodSplat;
 	[SerializeField]private Transform ironSight;
 	[SerializeField]private float bulletForce = 3.0f;
+	[SerializeField]private int damage = 10;
 	private Camera cam;
 	LayerMask mask;
 
@@ -27,8 +28,9 @@ public class FireProjectile : MonoBehaviour
 			{
 				toInstantiate = bloodSplat;
 				EnemyController enemy = info.transform.GetComponentInParent<EnemyController>();
-				enemy.TakeDamage();
+				enemy.TakeDamage(info.transform.GetComponent<Collider>(), damage);
 			}
+			else if (info.transform.GetComponentInParent<EnemyTag>()) toInstantiate = bloodSplat;
 			else toInstantiate = bulletDust;
 			
         	GameObject obj = Instantiate(toInstantiate, info.point, Quaternion.LookRotation(info.normal));
