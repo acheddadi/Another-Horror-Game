@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
 			do
 			{
 				randomPos = Random.insideUnitCircle * wanderDistance;
+				randomPos.z = randomPos.y; randomPos.y = 0.0f;
 				randomPos += transform.position;
 			} while (!nav.SetDestination(randomPos));
 			timer = recurringTimer;
@@ -73,12 +74,14 @@ public class EnemyController : MonoBehaviour
 		Vector3 otherDir = other.transform.position - transform.position;
 		Physics.Raycast(transform.position, otherDir, out info, Mathf.Infinity);
 		PlayerController player = info.transform.GetComponent<PlayerController>();
-		if (player != null)
-		{
-			nav.destination = player.transform.position;
-			if ((nav.destination - transform.position).magnitude > nav.stoppingDistance) isRunning = true;
-			timer = recurringTimer;
-		}
+		if (player != null) Attract(player.transform.position);
+	}
+
+	public void Attract(Vector3 position)
+	{
+		nav.destination = position;
+		if ((nav.destination - transform.position).magnitude > nav.stoppingDistance) isRunning = true;
+		timer = recurringTimer;
 	}
 
 	public void TakeDamage()

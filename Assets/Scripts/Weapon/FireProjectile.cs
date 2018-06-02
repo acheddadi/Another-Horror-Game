@@ -8,17 +8,19 @@ public class FireProjectile : MonoBehaviour
 	[SerializeField]private Transform ironSight;
 	[SerializeField]private float bulletForce = 3.0f;
 	private Camera cam;
+	LayerMask mask;
 
 	void Start()
 	{
 		cam = Camera.main;
+		mask = ~LayerMask.GetMask("Player", "Ignore Raycast");
 	}
 
 	public void Fire()
 	{
 		RaycastHit info;
 		Ray ray = cam.ViewportPointToRay(cam.WorldToViewportPoint(ironSight.position));
-		if (Physics.Raycast(ray, out info,float.PositiveInfinity))
+		if (Physics.Raycast(ray, out info,float.PositiveInfinity, mask))
 		{
 			GameObject toInstantiate;
 			if (info.transform.GetComponentInParent<EnemyController>())
@@ -28,7 +30,7 @@ public class FireProjectile : MonoBehaviour
 				enemy.TakeDamage();
 			}
 			else toInstantiate = bulletDust;
-
+			
         	GameObject obj = Instantiate(toInstantiate, info.point, Quaternion.LookRotation(info.normal));
 			obj.transform.localPosition += Vector3.back * 0.001f;
 			obj.SetActive(true);
@@ -39,7 +41,12 @@ public class FireProjectile : MonoBehaviour
 				Rigidbody rb = info.transform.GetComponent<Rigidbody>();
 				rb.AddForce(ray.direction * bulletForce);
 			}
-
+		}
+		EnemyController[] enemyHeard = FindObjectsOfType<EnemyController>();
+		foreach (EnemyController enemy in enemyHeard)
+		{
+			Collider collider = GetComponent<Collider>();
+			if (collider.bounds.Contains(enemy.transform.position)) enemy.Attract(transform.position);
 		}
 	}
 }
