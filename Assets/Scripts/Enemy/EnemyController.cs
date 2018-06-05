@@ -7,14 +7,13 @@ public class EnemyController : MonoBehaviour
 {
 	[SerializeField]private int health = 90, staggerDamage = 30, criticalMultiplier = 3;
 	[SerializeField]private float wanderDistance = 5.0f, recurringTimer = 5.0f;
-	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f;
+	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
 	private Animator anime;
 	private NavMeshAgent nav;
-	private float timer, speed, accel;
+	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private Vector3 randomPos;
 	private bool isRunning = false, isStaggered = false;
-	private float velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private int builtUpDamage = 0;
 
 	// Use this for initialization
@@ -23,6 +22,7 @@ public class EnemyController : MonoBehaviour
 		anime = GetComponent<Animator>();
 		nav = GetComponent<NavMeshAgent>();
 		anime.SetFloat("Random Walk", Random.Range(0.0f, 1.0f));
+		lastAttack = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -130,5 +130,15 @@ public class EnemyController : MonoBehaviour
 		yield return new WaitForSeconds(staggerTime);
 		nav.isStopped = false;
 		isStaggered = false;
+	}
+
+	public void Attack()
+	{
+		if (Time.time > lastAttack + attackFrequency)
+		{
+			anime.SetFloat("Random Attack", Random.Range(0.0f, 1.0f));
+			anime.SetTrigger("Attack");
+			lastAttack = Time.time;
+		}
 	}
 }

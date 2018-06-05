@@ -14,6 +14,9 @@ public class LookAt : MonoBehaviour
 			nav.isStopped = true;
 			Vector3 playerDir = player.transform.position - nav.transform.position; playerDir.y = 0.0f;
 			nav.transform.rotation = Quaternion.RotateTowards(nav.transform.rotation, Quaternion.LookRotation(playerDir), 10.0f);
+
+			EnemyController enemy = GetComponentInParent<EnemyController>();
+			enemy.Attack();
 		}
 	}
 

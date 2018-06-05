@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestShooting.unity
     guid: 36966a19bce414449a3eb3ee1c462071
-  - enabled: 1
-    path: Assets/Scenes/TestLevel2.unity
+  - enabled: 0
+    path: Assets/Scenes/TestLevel.unity
     guid: 394b30e36d915cf40b8d70de36f4105e
+  - enabled: 1
+    path: Assets/Scenes/TestEnemy.unity
+    guid: babb7432b5072e640b901c82419111b6
   m_configObjects: {}
