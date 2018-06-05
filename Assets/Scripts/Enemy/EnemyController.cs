@@ -79,7 +79,7 @@ public class EnemyController : MonoBehaviour
 		Vector3 otherDir = other.transform.position - transform.position;
 		Physics.Raycast(transform.position, otherDir, out info, Mathf.Infinity);
 		PlayerController player = info.transform.GetComponent<PlayerController>();
-		if (player != null) Attract(player.transform.position);
+		if (player != null && !isStaggered) Attract(player.transform.position);
 	}
 
 	public void Attract(Vector3 position)
@@ -115,11 +115,15 @@ public class EnemyController : MonoBehaviour
 
 	private void OnDestroy()
 	{
+		Destroy(GetComponent<Collider>());
 		Destroy(GetComponent<Animator>());
 		Destroy(GetComponent<NavMeshAgent>());
 		Destroy(GetComponentInChildren<LookAt>().gameObject);
 		Rigidbody[] rbs = GetComponentsInChildren<Rigidbody>();
 		foreach (Rigidbody rb in rbs) rb.isKinematic = false;
+		List<Transform> children = new List<Transform>();
+		for (int i = 0; i < transform.childCount; i++) children.Add(transform.GetChild(i));
+		foreach (Transform child in children) foreach (Collider col in child.GetComponentsInChildren<Collider>()) col.isTrigger = false;
 	}
 
 	private IEnumerator PauseNavigation()
@@ -134,7 +138,7 @@ public class EnemyController : MonoBehaviour
 
 	public void Attack()
 	{
-		if (Time.time > lastAttack + attackFrequency)
+		if (Time.time > lastAttack + attackFrequency && !isStaggered)
 		{
 			anime.SetFloat("Random Attack", Random.Range(0.0f, 1.0f));
 			anime.SetTrigger("Attack");

@@ -339,7 +339,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 200903079}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.00021939602
   m_Height: 0.0016439025
@@ -1248,7 +1248,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5322
+  m_Name: pb_Mesh5348
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -2209,7 +2209,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 783375906}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   walkSpeed: 1.25
   runMultiplier: 2
   acceleration: 7
-  staggerTime: 1
+  staggerTime: 1.5
   attackFrequency: 2
   criticalHit: {fileID: 1599975884}
 --- !u!135 &783375909
@@ -2254,8 +2254,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 1, z: 2}
+  m_Radius: 4
+  m_Center: {x: 0, y: 1, z: 3}
 --- !u!4 &783375910
 Transform:
   m_ObjectHideFlags: 0
@@ -3747,7 +3747,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5446
+  m_Name: pb_Mesh5732
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3951,7 +3951,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5410
+  m_Name: pb_Mesh5540
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4501,7 +4501,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5350
+  m_Name: pb_Mesh5420
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4705,7 +4705,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5378
+  m_Name: pb_Mesh5468
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -5206,9 +5206,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1742264729}
   - component: {fileID: 1742264730}
+  - component: {fileID: 1742264732}
   - component: {fileID: 1742264731}
   m_Layer: 2
-  m_Name: Field of View
+  m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5250,6 +5251,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e6bb1ee1b9ec9409586a207614b3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1742264732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1742264728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1746475376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,7 +5656,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1838825281}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.00024398923
   m_Height: 0.0015939517
@@ -5741,7 +5754,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1917026325}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
