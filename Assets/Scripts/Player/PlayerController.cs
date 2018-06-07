@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
 			health -= damage;
 			hurtEffect.ReactToHurt();
 			lastCooldown = Time.time;
-			Debug.Log(health);
 		}
 		
 	}

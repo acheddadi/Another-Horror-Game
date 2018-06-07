@@ -5,8 +5,18 @@ using UnityEngine;
 public class DamageWobble : MonoBehaviour
 {
 	[SerializeField]private float wobbleStrength = 5.0f;
+	[SerializeField]private AudioClip[] hurtClips;
+	private AudioSource source;
+	private PlayerController player;
 	private const int MULTIPLIER = 100;
 	private bool isWobbling = false;
+	private int lastRndm = -1;
+
+	void Start()
+	{
+		player = GetComponentInParent<PlayerController>();
+		source = GetComponent<AudioSource>();
+	}
 
 	public void ReactToHurt()
 	{
@@ -23,6 +33,17 @@ public class DamageWobble : MonoBehaviour
 			{
 				transform.localEulerAngles = initRot + (Vector3.forward * Mathf.Clamp(i, 0.0f, wobbleStrength));
 				yield return null;
+			}
+			if ((hurtClips.Length > 0) && (player != null) && (source != null))
+			{
+				int rndNmb;
+				do
+				{
+					rndNmb = Random.Range(0, hurtClips.Length - 1);
+				} while (rndNmb == lastRndm);
+				lastRndm = rndNmb;
+				source.clip = hurtClips[rndNmb];
+				source.Play();
 			}
 			transform.localEulerAngles = initRot + Vector3.forward * wobbleStrength;
 			for (float i = 0.0f; i < wobbleStrength; i += Time.deltaTime * MULTIPLIER)

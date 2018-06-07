@@ -9,6 +9,7 @@ public class HitBox : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player != null) player.TakeDamage(damageAmount);
+		EnemyController enemy = GetComponentInParent<EnemyController>();
+		if (player != null && enemy.IsAttacking()) player.TakeDamage(damageAmount);
 	}
 }

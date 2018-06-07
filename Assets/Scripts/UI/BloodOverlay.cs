@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BloodOverlay : MonoBehaviour
 {
 	[SerializeField]private Texture[] bloodTexture;
+	[SerializeField]private float minOpacity = 0.5f, maxOpacity = 0.8f;
 	private RawImage img;
 	private Texture originalTexture;
 	private int index = 0, count = 0;
@@ -24,16 +25,16 @@ public class BloodOverlay : MonoBehaviour
 		{
 			if (img.color.a > 0.5f)
 			{
-				float alpha = Mathf.Clamp(img.color.a - 0.5f * Time.deltaTime, 0.5f, 1.0f);
+				float alpha = Mathf.Clamp(img.color.a - minOpacity * Time.deltaTime, minOpacity, maxOpacity);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);
 			}
 			else direction = !direction;
 		}
 		else
 		{
-			if (img.color.a < 1.0f)
+			if (img.color.a < 0.8f)
 			{
-				float alpha = Mathf.Clamp(img.color.a + 0.5f * Time.deltaTime, 0.5f, 1.0f);
+				float alpha = Mathf.Clamp(img.color.a + minOpacity * Time.deltaTime, minOpacity, maxOpacity);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);
 			}
 			else direction = !direction;

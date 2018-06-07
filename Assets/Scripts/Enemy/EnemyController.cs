@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 	private NavMeshAgent nav;
 	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private Vector3 randomPos;
-	private bool isRunning = false, isStaggered = false;
+	private bool isRunning = false, isStaggered = false, isAttacking = false;
 	private int builtUpDamage = 0;
 
 	// Use this for initialization
@@ -71,6 +71,7 @@ public class EnemyController : MonoBehaviour
 		anime.SetBool("isRunning", isRunning);
 		nav.speed = Mathf.SmoothDamp(nav.speed, speed, ref velocity, smoothTime);
 		nav.acceleration = accel;
+		isAttacking = anime.GetCurrentAnimatorStateInfo(0).IsName("Attack") || anime.GetCurrentAnimatorStateInfo(1).IsName("Attack");
 	}
 
 	void OnTriggerStay(Collider other)
@@ -144,5 +145,10 @@ public class EnemyController : MonoBehaviour
 			anime.SetTrigger("Attack");
 			lastAttack = Time.time;
 		}
+	}
+
+	public bool IsAttacking()
+	{
+		return isAttacking;
 	}
 }
