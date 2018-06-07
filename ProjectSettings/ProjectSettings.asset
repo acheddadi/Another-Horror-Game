@@ -661,12 +661,14 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 0
+    Collab: 1
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 
-  projectName: Template_3D
-  organizationId: 
+  cloudProjectId: fa500958-cdd7-4062-b76b-008add703f35
+  projectName: Another-Horror-Game
+  organizationId: geostegma
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
