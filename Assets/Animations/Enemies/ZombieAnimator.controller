@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: zombie_anim
+  m_Name: ZombieAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed
@@ -216,7 +216,7 @@ BlendTree:
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
-    m_DirectBlendParameter: Speed
+    m_DirectBlendParameter: Random Attack
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400006, guid: b54cd663e6e9bf146aabc8d7cb1b8db0, type: 3}
@@ -224,7 +224,7 @@ BlendTree:
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
-    m_DirectBlendParameter: Speed
+    m_DirectBlendParameter: Random Attack
     m_Mirror: 0
   m_BlendParameter: Random Attack
   m_BlendParameterY: Speed

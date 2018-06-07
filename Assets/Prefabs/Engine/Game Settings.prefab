@@ -808,6 +808,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 634bc229441aba541ab6debbddf07305, type: 3}
   - {fileID: 2800000, guid: 69d464272a8fcab4fb2db7ab2bf1cc5c, type: 3}
   - {fileID: 2800000, guid: 16acf4cdfe7b5874ebb09f9ed16ef00b, type: 3}
+  minOpacity: 0.5
+  maxOpacity: 0.8
 --- !u!114 &114737132181616856
 MonoBehaviour:
   m_ObjectHideFlags: 1

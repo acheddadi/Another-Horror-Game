@@ -72,6 +72,5 @@ public class PlayerController : MonoBehaviour
 			hurtEffect.ReactToHurt();
 			lastCooldown = Time.time;
 		}
-		
 	}
 }

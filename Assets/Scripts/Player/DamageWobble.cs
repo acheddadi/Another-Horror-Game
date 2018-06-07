@@ -10,7 +10,6 @@ public class DamageWobble : MonoBehaviour
 	private PlayerController player;
 	private const int MULTIPLIER = 100;
 	private bool isWobbling = false;
-	private int lastRndm = -1;
 
 	void Start()
 	{
@@ -36,12 +35,7 @@ public class DamageWobble : MonoBehaviour
 			}
 			if ((hurtClips.Length > 0) && (player != null) && (source != null))
 			{
-				int rndNmb;
-				do
-				{
-					rndNmb = Random.Range(0, hurtClips.Length - 1);
-				} while (rndNmb == lastRndm);
-				lastRndm = rndNmb;
+				int rndNmb = Random.Range(0, hurtClips.Length - 1);
 				source.clip = hurtClips[rndNmb];
 				source.Play();
 			}

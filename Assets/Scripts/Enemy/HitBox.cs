@@ -10,6 +10,10 @@ public class HitBox : MonoBehaviour
 	{
 		PlayerController player = other.GetComponent<PlayerController>();
 		EnemyController enemy = GetComponentInParent<EnemyController>();
-		if (player != null && enemy.IsAttacking()) player.TakeDamage(damageAmount);
+		if (player != null && enemy.IsAttacking())
+		{
+			player.TakeDamage(damageAmount);
+			enemy.HitSFX();
+		}
 	}
 }

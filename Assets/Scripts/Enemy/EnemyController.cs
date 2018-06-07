@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]private float wanderDistance = 5.0f, recurringTimer = 5.0f;
 	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
+	[SerializeField]private AudioClip[] damageClips;
+	private AudioSource source;
 	private Animator anime;
 	private NavMeshAgent nav;
 	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
@@ -19,6 +21,7 @@ public class EnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		source = GetComponent<AudioSource>();
 		anime = GetComponent<Animator>();
 		nav = GetComponent<NavMeshAgent>();
 		anime.SetFloat("Random Walk", Random.Range(0.0f, 1.0f));
@@ -150,5 +153,15 @@ public class EnemyController : MonoBehaviour
 	public bool IsAttacking()
 	{
 		return isAttacking;
+	}
+
+	public void HitSFX()
+	{
+		if ((damageClips.Length > 0) && (source != null))
+		{
+			int rndNmb = Random.Range(0, damageClips.Length - 1);
+			source.clip = damageClips[rndNmb];
+			source.Play();
+		}
 	}
 }
