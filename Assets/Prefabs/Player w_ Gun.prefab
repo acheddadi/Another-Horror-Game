@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 81866405803616308}
   - component: {fileID: 114031976586782456}
   - component: {fileID: 114182175111197752}
+  - component: {fileID: 114681013673331024}
   m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -261,7 +262,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431706475448628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -4}
+  m_LocalPosition: {x: 0, y: 2, z: -4}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4179797445024948}
@@ -942,6 +943,7 @@ MonoBehaviour:
   gravity: 9.8
   distanceToInteractable: 1
   interactionRadius: 0.25
+  invincibilityCooldown: 0.5
 --- !u!114 &114513692672068898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -981,6 +983,18 @@ MonoBehaviour:
   wobbleSpeed: 0.1
   audibleFootsteps: 0
   footstepClips: []
+--- !u!114 &114681013673331024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762514203965354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95909c326bc9ff42a2320c7e0df773e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wobbleStrength: 5
 --- !u!114 &114695123670561140
 MonoBehaviour:
   m_ObjectHideFlags: 1

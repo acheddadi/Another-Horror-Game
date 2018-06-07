@@ -38,31 +38,6 @@ public class BloodOverlay : MonoBehaviour
 			}
 			else direction = !direction;
 		}
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			if (count > 3) count = 0;
-			else count++;
-			Debug.Log(count);
-			switch (count)
-			{
-				case 0:
-				NextTexture(100);
-				break;
-				case 1:
-				NextTexture(75);
-				break;
-				case 2:
-				NextTexture(50);
-				break;
-				case 3:
-				NextTexture(25);
-				break;
-				case 4:
-				NextTexture(0);
-				break;
-			}
-		}
 	}
 
 	void OnDestroy()
@@ -70,7 +45,7 @@ public class BloodOverlay : MonoBehaviour
 		img.texture = originalTexture;
 	}
 
-	void NextTexture(int health)
+	public void DisplayOverlay(int health)
 	{
 		int damage = 100 - health;
 		index = Mathf.Clamp(Mathf.CeilToInt(damage / increments) - 1, 0, bloodTexture.Length - 1);

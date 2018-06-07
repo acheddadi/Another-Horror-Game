@@ -7,11 +7,10 @@ public class DamageWobble : MonoBehaviour
 	[SerializeField]private float wobbleStrength = 5.0f;
 	private const int MULTIPLIER = 100;
 	private bool isWobbling = false;
-	
-	// Update is called once per frame
-	void Update()
+
+	public void ReactToHurt()
 	{
-		if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine(Wobble());
+		StartCoroutine(Wobble());
 	}
 
 	private IEnumerator Wobble()
@@ -20,15 +19,15 @@ public class DamageWobble : MonoBehaviour
 		{
 			isWobbling = true;
 			Vector3 initRot = transform.localEulerAngles;
-			for (float i = 0.0f; i < 1.0f; i += 0.1f)
+			for (float i = 0.0f; i < wobbleStrength; i += Time.deltaTime * MULTIPLIER)
 			{
-				transform.localEulerAngles = initRot + Vector3.forward * i * wobbleStrength * MULTIPLIER * Time.deltaTime;
+				transform.localEulerAngles = initRot + (Vector3.forward * Mathf.Clamp(i, 0.0f, wobbleStrength));
 				yield return null;
 			}
 			transform.localEulerAngles = initRot + Vector3.forward * wobbleStrength;
-			for (float i = -1.0f; i < 0.0f; i += 0.1f)
+			for (float i = 0.0f; i < wobbleStrength; i += Time.deltaTime * MULTIPLIER)
 			{
-				transform.localEulerAngles = initRot + Vector3.forward * i * wobbleStrength * MULTIPLIER * Time.deltaTime;
+				transform.localEulerAngles = initRot + (Vector3.forward * -1 * Mathf.Clamp(i, 0.0f, wobbleStrength));
 				yield return null;
 			}
 			transform.localEulerAngles = initRot;

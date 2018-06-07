@@ -6,17 +6,23 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField]private bool enableGravity = true;
 	[SerializeField]private float movementSpeed = 3.0f, runMultiplier = 2.0f, gravity = 9.8f;
-	[SerializeField]private float distanceToInteractable = 3.0f, interactionRadius = 3.0f;
+	[SerializeField]private float distanceToInteractable = 3.0f, interactionRadius = 3.0f, invincibilityCooldown = 1.0f;
 	private CharacterController player;
 	private Camera cam;
 	private bool isRunning = false;
-	private float spd;
+	private float spd, lastCooldown;
+	private int health = 100;
+	private BloodOverlay healthDisplay;
+	private DamageWobble hurtEffect;
 
 	// Use this for initialization
 	void Start ()
 	{
 		player = GetComponent<CharacterController>();
 		cam = Camera.main;
+		healthDisplay = FindObjectOfType<BloodOverlay>();
+		hurtEffect = GetComponentInChildren<DamageWobble>();
+		lastCooldown = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour
 		movement *= spd * Time.deltaTime;
 		if (enableGravity) movement.y -= gravity * Time.deltaTime;
 		player.Move(movement);
+		healthDisplay.DisplayOverlay(health);
 	}
 
 	public bool IsRunning()
@@ -55,5 +62,17 @@ public class PlayerController : MonoBehaviour
 	public float RunMultiplier()
 	{
 		return runMultiplier;
+	}
+
+	public void TakeDamage(int damage)
+	{
+		if (Time.time > lastCooldown + invincibilityCooldown)
+		{
+			health -= damage;
+			hurtEffect.ReactToHurt();
+			lastCooldown = Time.time;
+			Debug.Log(health);
+		}
+		
 	}
 }
