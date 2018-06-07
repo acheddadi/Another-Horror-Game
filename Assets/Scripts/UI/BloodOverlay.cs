@@ -24,7 +24,7 @@ public class BloodOverlay : MonoBehaviour
 		{
 			if (img.color.a > 0.5f)
 			{
-				float alpha = Mathf.Clamp(img.color.a - Time.deltaTime, 0.5f, 1.0f);
+				float alpha = Mathf.Clamp(img.color.a - 0.5f * Time.deltaTime, 0.5f, 1.0f);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);
 			}
 			else direction = !direction;
@@ -33,7 +33,7 @@ public class BloodOverlay : MonoBehaviour
 		{
 			if (img.color.a < 1.0f)
 			{
-				float alpha = Mathf.Clamp(img.color.a + Time.deltaTime, 0.5f, 1.0f);
+				float alpha = Mathf.Clamp(img.color.a + 0.5f * Time.deltaTime, 0.5f, 1.0f);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);
 			}
 			else direction = !direction;
@@ -41,6 +41,8 @@ public class BloodOverlay : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
+			if (count > 3) count = 0;
+			else count++;
 			Debug.Log(count);
 			switch (count)
 			{
@@ -48,38 +50,18 @@ public class BloodOverlay : MonoBehaviour
 				NextTexture(100);
 				break;
 				case 1:
-				NextTexture(90);
+				NextTexture(75);
 				break;
 				case 2:
-				NextTexture(80);
-				break;
-				case 3:
-				NextTexture(70);
-				break;
-				case 4:
-				NextTexture(60);
-				break;
-				case 5:
 				NextTexture(50);
 				break;
-				case 6:
-				NextTexture(40);
+				case 3:
+				NextTexture(25);
 				break;
-				case 7:
-				NextTexture(30);
-				break;
-				case 8:
-				NextTexture(20);
-				break;
-				case 9:
-				NextTexture(10);
-				break;
-				case 10:
+				case 4:
 				NextTexture(0);
 				break;
 			}
-			if (count > 9) count = 0;
-			else count++;
 		}
 	}
 
@@ -91,7 +73,7 @@ public class BloodOverlay : MonoBehaviour
 	void NextTexture(int health)
 	{
 		int damage = 100 - health;
-		index = Mathf.Clamp(Mathf.RoundToInt(damage / increments) - 1, 0, bloodTexture.Length - 1);
+		index = Mathf.Clamp(Mathf.CeilToInt(damage / increments) - 1, 0, bloodTexture.Length - 1);
 		img.texture = bloodTexture[index];
 	}
 }

@@ -179,11 +179,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114699676011352060, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: bloodTexture.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4039479238740400, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -216,36 +211,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114831118223693660, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 479d4e414c3197042b1c0772d2f4eb05, type: 3}
-    - target: {fileID: 114831118223693660, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224808030372457540, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.1772152
-      objectReference: {fileID: 0}
-    - target: {fileID: 114699676011352060, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: bloodTexture.Array.data[4]
-      value: 
-      objectReference: {fileID: 2800000, guid: 16acf4cdfe7b5874ebb09f9ed16ef00b, type: 3}
-    - target: {fileID: 114699676011352060, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: bloodTexture.Array.data[5]
-      value: 
-      objectReference: {fileID: 2800000, guid: 4d4c79569bc1fc647a4dad3b8c6a06e4, type: 3}
-    - target: {fileID: 114699676011352060, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: bloodTexture.Array.data[6]
-      value: 
-      objectReference: {fileID: 2800000, guid: 49396d8343ff92f4b81ba4cc0a4c7e55, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
   m_IsPrefabParent: 0

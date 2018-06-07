@@ -808,8 +808,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 634bc229441aba541ab6debbddf07305, type: 3}
   - {fileID: 2800000, guid: 69d464272a8fcab4fb2db7ab2bf1cc5c, type: 3}
   - {fileID: 2800000, guid: 16acf4cdfe7b5874ebb09f9ed16ef00b, type: 3}
-  - {fileID: 2800000, guid: 4d4c79569bc1fc647a4dad3b8c6a06e4, type: 3}
-  - {fileID: 2800000, guid: 49396d8343ff92f4b81ba4cc0a4c7e55, type: 3}
 --- !u!114 &114737132181616856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -977,14 +975,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 479d4e414c3197042b1c0772d2f4eb05, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
