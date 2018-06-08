@@ -64,7 +64,7 @@ public class WalkWobble : MonoBehaviour
 		isWobbling = false;
 		if ((footstepClips.Length > 0) && audibleFootsteps && (player != null) && (source != null))
 		{
-			int rndNmb = Random.Range(0, footstepClips.Length - 1);
+			int rndNmb = Random.Range(0, footstepClips.Length);
 			source.clip = footstepClips[rndNmb];
 			source.Play();
 		}

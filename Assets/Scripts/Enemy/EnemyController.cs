@@ -9,13 +9,13 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]private float wanderDistance = 5.0f, recurringTimer = 5.0f;
 	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
-	[SerializeField]private AudioClip[] damageClips;
+	[SerializeField]private AudioClip[] idleClips, attackClips, attractClips, staggerClips;
 	private AudioSource source;
 	private Animator anime;
 	private NavMeshAgent nav;
 	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private Vector3 randomPos;
-	private bool isRunning = false, isStaggered = false, isAttacking = false;
+	private bool isRunning = false, isStaggered = false, isAttacking = false, playOnce = false;
 	private int builtUpDamage = 0;
 
 	// Use this for initialization
@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
 				randomPos += transform.position;
 			} while (!nav.SetDestination(randomPos));
 			timer = recurringTimer;
+			playOnce = false;
 		}
 
 		if (isRunning)
@@ -88,6 +89,11 @@ public class EnemyController : MonoBehaviour
 
 	public void Attract(Vector3 position)
 	{
+		if (!playOnce)
+		{
+			PlaySFX(attractClips);
+			playOnce = true;
+		}
 		nav.destination = position;
 		if ((nav.destination - transform.position).magnitude > nav.stoppingDistance) isRunning = true;
 		timer = recurringTimer;
@@ -101,15 +107,15 @@ public class EnemyController : MonoBehaviour
 		builtUpDamage += damage;
 		health -= damage;
 
-		if (builtUpDamage >= staggerDamage)
+		if (health <= 0) Death();
+		else if (builtUpDamage >= staggerDamage)
 		{
 			anime.SetFloat("Random Damage", Random.Range(0.0f, 1.0f));
 			anime.SetTrigger("Damage");
 			StartCoroutine(PauseNavigation());
+			PlaySFX(staggerClips);
 			builtUpDamage = 0;
 		}
-
-		if (health <= 0) Death();
 	}
 
 	private void Death()
@@ -146,6 +152,7 @@ public class EnemyController : MonoBehaviour
 		{
 			anime.SetFloat("Random Attack", Random.Range(0.0f, 1.0f));
 			anime.SetTrigger("Attack");
+			PlaySFX(attackClips);
 			lastAttack = Time.time;
 		}
 	}
@@ -155,12 +162,13 @@ public class EnemyController : MonoBehaviour
 		return isAttacking;
 	}
 
-	public void HitSFX()
+	private void PlaySFX(AudioClip[] clipToPlay)
 	{
-		if ((damageClips.Length > 0) && (source != null))
+		if ((clipToPlay.Length > 0) && (source != null))
 		{
-			int rndNmb = Random.Range(0, damageClips.Length - 1);
-			source.clip = damageClips[rndNmb];
+			int rndNmb = Random.Range(0, clipToPlay.Length);
+			source.clip = clipToPlay[rndNmb];
+			source.pitch = Random.Range(0.8f, 1.2f);
 			source.Play();
 		}
 	}

@@ -23,7 +23,6 @@ AudioMixerController:
     - 5ce58dc7fee9d074ca2f5e0105b31b1f
     - 0b8457f89d702114eabbc2d6eb8ac225
     - c1c5e7867b04a964bace9c7c22b29d3e
-    - 904d8ec1e79c4e347ab42146313f249a
     - 631123171a80d2c4cab18e7966c2d7c9
     name: View
   m_CurrentViewIndex: 0
@@ -99,7 +98,7 @@ AudioMixerSnapshotController:
     7304bfadfcc7c2644be2fac165f485ba: 0
     cc7731be12f08ba4bbec50eb1b15d176: 0.1
     867fe51f06373ed4b8c5ead926a4d9e6: 0
-    5e2c7f1fd9710134d8a58190c23aaf78: -14
+    5e2c7f1fd9710134d8a58190c23aaf78: -8
     ca05944f216db6844a1904cc3641c972: 0
   m_TransitionOverrides: {}
 --- !u!243 &243218801437085490
@@ -117,25 +116,6 @@ AudioMixerGroupController:
   - {fileID: 244440230105144562}
   - {fileID: 244428179251289864}
   - {fileID: 244871626056324480}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
---- !u!243 &243219355251249308
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Enemy SFX
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 904d8ec1e79c4e347ab42146313f249a
-  m_Children: []
-  m_Volume: 638d7a2bcc66d0c4b8790106b0673b3b
-  m_Pitch: d1249cdc45e231941814f2db5d675263
-  m_Effects:
-  - {fileID: 244650612473575564}
-  - {fileID: 244365466292144754}
-  - {fileID: 244251356877767300}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -206,7 +186,6 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 243988767625948154}
   - {fileID: 243273629311908780}
-  - {fileID: 243219355251249308}
   m_Volume: e51b8181f4cada14ba951a6aecf053f1
   m_Pitch: f5db0158a4124af4aa3f001301c2cbfe
   m_Effects:
@@ -273,33 +252,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 244573926552188754}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &244251356877767300
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: 397eb98b4bb178a47a9f9e975f3a2cb9
-  m_EffectName: Duck Volume
-  m_MixLevel: bf1bcc2858e950e44941ddd7f15d85b9
-  m_Parameters:
-  - m_ParameterName: Threshold
-    m_GUID: 319ba441920610d4c8a9f94564599ab3
-  - m_ParameterName: Ratio
-    m_GUID: 4eda5e3f8d3145f4f9ab11548ca106f7
-  - m_ParameterName: Attack Time
-    m_GUID: 96fb83c585f02b4498e437d0fa006b6c
-  - m_ParameterName: Release Time
-    m_GUID: 9e1b416e0f9166641b7e3ff0190be174
-  - m_ParameterName: Make-up Gain
-    m_GUID: c716f12ab79ce3e4eab0b9480f02139a
-  - m_ParameterName: Knee
-    m_GUID: 4e84d020b17aa2e48b4a87293ba2512a
-  - m_ParameterName: Sidechain Mix
-    m_GUID: e52b8d1e02893c84494c2ffef155d48d
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &244304664577631098
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -325,19 +277,6 @@ AudioMixerEffectController:
   - m_ParameterName: Sidechain Mix
     m_GUID: 0f01c89a7a8cb0d45bcf026c3dffaf0e
   m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &244365466292144754
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: b86061a59e7e05445b3151bd48a516a0
-  m_EffectName: Send
-  m_MixLevel: 49cdeef203edefb4d9b7eb910cf37da2
-  m_Parameters: []
-  m_SendTarget: {fileID: 244496753897047892}
   m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &244428179251289864
@@ -513,19 +452,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &244650612473575564
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: e6f7d2d6c2e89f041989ee4a782542d5
-  m_EffectName: Attenuation
-  m_MixLevel: 1b6a1509b77b5634b87287613a5e655e
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &244703613669789824
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -602,7 +528,7 @@ AudioMixerEffectController:
   m_EffectName: Send
   m_MixLevel: 94e443d3581bb66498e8abaeac27991e
   m_Parameters: []
-  m_SendTarget: {fileID: 244251356877767300}
+  m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &244952985891344656

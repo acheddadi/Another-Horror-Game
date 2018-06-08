@@ -9,7 +9,7 @@ public class BloodSplat : MonoBehaviour
 	void Start ()
 	{
 		anime = GetComponent<Animator>();
-		anime.SetInteger("choice", Random.Range(0, 3));
+		anime.SetInteger("choice", Random.Range(0, 4));
 	}
 	
 	// Update is called once per frame

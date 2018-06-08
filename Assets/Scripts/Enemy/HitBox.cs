@@ -13,7 +13,6 @@ public class HitBox : MonoBehaviour
 		if (player != null && enemy.IsAttacking())
 		{
 			player.TakeDamage(damageAmount);
-			enemy.HitSFX();
 		}
 	}
 }
