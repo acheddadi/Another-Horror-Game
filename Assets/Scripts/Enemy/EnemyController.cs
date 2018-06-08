@@ -67,7 +67,6 @@ public class EnemyController : MonoBehaviour
 			);
 			anime.SetFloat("Speed", animSpd);
 			timer -= Time.deltaTime;
-			playOnce = false;
 		}
 
 		if ((nav.destination - transform.position).magnitude <= nav.stoppingDistance) isRunning = false;
@@ -85,6 +84,12 @@ public class EnemyController : MonoBehaviour
 		Physics.Raycast(transform.position, otherDir, out info, Mathf.Infinity);
 		PlayerController player = info.transform.GetComponent<PlayerController>();
 		if (player != null && !isStaggered) Attract(player.transform.position);
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		PlayerController player = other.GetComponent<PlayerController>();
+		if (player != null) playOnce = false;
 	}
 
 	public void Attract(Vector3 position)
