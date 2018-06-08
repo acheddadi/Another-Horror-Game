@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]private float wanderDistance = 5.0f, recurringTimer = 5.0f;
 	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
-	[SerializeField]private AudioClip[] idleClips, attackClips, attractClips, staggerClips;
+	[SerializeField]private AudioClip[] idleClips, attackClips, attractClips, staggerClips, deathClips;
 	private AudioSource source;
 	private Animator anime;
 	private NavMeshAgent nav;
@@ -40,7 +40,6 @@ public class EnemyController : MonoBehaviour
 				randomPos += transform.position;
 			} while (!nav.SetDestination(randomPos));
 			timer = recurringTimer;
-			playOnce = false;
 		}
 
 		if (isRunning)
@@ -68,6 +67,7 @@ public class EnemyController : MonoBehaviour
 			);
 			anime.SetFloat("Speed", animSpd);
 			timer -= Time.deltaTime;
+			playOnce = false;
 		}
 
 		if ((nav.destination - transform.position).magnitude <= nav.stoppingDistance) isRunning = false;
@@ -120,6 +120,7 @@ public class EnemyController : MonoBehaviour
 
 	private void Death()
 	{
+		PlaySFX(deathClips);
 		Destroy(GetComponent<EnemyController>());
 	}
 
