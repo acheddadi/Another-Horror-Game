@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 	private NavMeshAgent nav;
 	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private Vector3 randomPos;
-	private bool isRunning = false, isStaggered = false, isAttacking = false, playOnce = false;
+	private bool isRunning = false, isStaggered = false, isAttacking = false, playedOnce = false;
 	private int builtUpDamage = 0;
 
 	// Use this for initialization
@@ -89,15 +89,15 @@ public class EnemyController : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		PlayerController player = other.GetComponent<PlayerController>();
-		if (player != null) playOnce = false;
+		if (player != null) playedOnce = false;
 	}
 
 	public void Attract(Vector3 position)
 	{
-		if (!playOnce)
+		if (!playedOnce)
 		{
 			PlaySFX(attractClips);
-			playOnce = true;
+			playedOnce = true;
 		}
 		nav.destination = position;
 		if ((nav.destination - transform.position).magnitude > nav.stoppingDistance) isRunning = true;
