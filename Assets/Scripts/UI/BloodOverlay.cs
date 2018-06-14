@@ -39,17 +39,14 @@ public class BloodOverlay : MonoBehaviour
 			}
 			else direction = !direction;
 		}
+
+		int damage = 100 - GameController.health;
+		index = Mathf.Clamp(Mathf.CeilToInt(damage / increments) - 1, 0, bloodTexture.Length - 1);
+		img.texture = bloodTexture[index];
 	}
 
 	void OnDestroy()
 	{
 		img.texture = originalTexture;
-	}
-
-	public void DisplayOverlay(int health)
-	{
-		int damage = 100 - health;
-		index = Mathf.Clamp(Mathf.CeilToInt(damage / increments) - 1, 0, bloodTexture.Length - 1);
-		img.texture = bloodTexture[index];
 	}
 }

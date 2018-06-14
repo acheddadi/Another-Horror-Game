@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private PauseScreen pause;
     [SerializeField]private TextScrolling textDisplay;
     public static bool gameIsPaused = false;
+    public static int health = 100;
 	// Use this for initialization
     void Start()
     {

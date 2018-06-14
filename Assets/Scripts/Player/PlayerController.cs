@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
 	private Camera cam;
 	private bool isRunning = false;
 	private float spd, lastCooldown;
-	private int health = 100;
-	private BloodOverlay healthDisplay;
 	private DamageWobble hurtEffect;
 
 	// Use this for initialization
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour
 	{
 		player = GetComponent<CharacterController>();
 		cam = Camera.main;
-		healthDisplay = FindObjectOfType<BloodOverlay>();
 		hurtEffect = GetComponentInChildren<DamageWobble>();
 		lastCooldown = Time.time;
 	}
@@ -51,7 +48,6 @@ public class PlayerController : MonoBehaviour
 		movement *= spd * Time.deltaTime;
 		if (enableGravity) movement.y -= gravity * Time.deltaTime;
 		player.Move(movement);
-		healthDisplay.DisplayOverlay(health);
 	}
 
 	public bool IsRunning()
@@ -68,7 +64,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Time.time > lastCooldown + invincibilityCooldown)
 		{
-			health -= damage;
+			GameController.health -= damage;
 			hurtEffect.ReactToHurt();
 			lastCooldown = Time.time;
 		}
