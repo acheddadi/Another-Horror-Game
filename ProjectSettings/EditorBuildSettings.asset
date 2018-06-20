@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing/TestEnemy.unity
     guid: babb7432b5072e640b901c82419111b6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/Forest.unity
     guid: 313692f31cd0a6d42b982e65ea97a103
+  - enabled: 1
+    path: Assets/Imports/Low Poly Flat Sci Fi Assets/Demo/Scenes/Sample Scene.unity
+    guid: 0b0403de45d31496f8b90f72b42b0ba0
   m_configObjects: {}
