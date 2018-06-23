@@ -31,7 +31,7 @@ public class InteractableController : MonoBehaviour
 		if (outline != null)
 		{
 			outline.GetComponent<MeshRenderer>().enabled = false;
-			if (highlight) outline.GetComponent<MeshRenderer>().enabled = true;
+			GameController.leftClick = highlight;
 			highlight = false;
 		}
 	}
