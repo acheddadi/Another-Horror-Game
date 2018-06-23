@@ -22,7 +22,7 @@ public class TextScrolling : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void LateUpdate()
 	{
 		if (displayingText)
 		{
@@ -51,7 +51,7 @@ public class TextScrolling : MonoBehaviour
 	{
 		displayingText = true;
 		foreach (string i in text.dialogue) paragraph.Enqueue(i);
-		NextSentence();
+		//NextSentence();
 	}
 
 	public void NextSentence()
