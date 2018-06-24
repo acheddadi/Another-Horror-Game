@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractableController : MonoBehaviour
 {
-	[SerializeField]private enum InteractionType { ITEM, NPC, DOOR }
+	[SerializeField]private enum InteractionType { ITEM, EVENT, DOOR }
 	[SerializeField]private InteractionType type;
 	[SerializeField]private Dialogue dialogue;
 	private GameObject outline;
@@ -47,8 +47,8 @@ public class InteractableController : MonoBehaviour
 		{
 			case InteractionType.ITEM:
 			break;
-			case InteractionType.NPC:
-			gameController.PassDialogue(dialogue);
+			case InteractionType.EVENT:
+			gameController.PassDialogue(dialogue, true);
 			break;
 			case InteractionType.DOOR:
 			break;

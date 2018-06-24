@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class TextScrolling : MonoBehaviour
 {
 	[SerializeField]private float scrollSpeed = 3.0f;
+	[SerializeField]private Text textField;
+	[SerializeField]private GameObject selection;
 	private string fullSentence, scrollSentence;
 	private float oldTime;
-	private Text textField;
-	private bool doneScrolling = false, displayingText = false, unPauseOnce = false;
+	private bool doneScrolling = false, displayingText = false, unPauseOnce = false, isEvent = false;
 	private Queue<string> paragraph;
 
 	// Use this for initialization
 	void Start()
 	{
-		textField = GetComponentInChildren<Text>();
 		oldTime = Time.unscaledTime;
 		paragraph = new Queue<string>();
 		textField.text = scrollSentence = fullSentence = string.Empty;
@@ -37,7 +37,15 @@ public class TextScrolling : MonoBehaviour
 				else doneScrolling = true;
 				oldTime = Time.unscaledTime;
 			}
-			if (Input.GetMouseButtonDown(0)) NextSentence();
+			if (!isEvent && Input.GetMouseButtonDown(0)) NextSentence();
+			else
+			{
+				if (paragraph.Count == 0)
+				{
+					if (scrollSentence == fullSentence) ShowSelection();
+				}
+				else if (Input.GetMouseButtonDown(0)) NextSentence();
+			}
 		}
 		else if (unPauseOnce)
 		{
@@ -47,8 +55,9 @@ public class TextScrolling : MonoBehaviour
 		textField.text = scrollSentence;
 	}
 
-	public void DisplayDialogue(Dialogue text)
+	public void DisplayDialogue(Dialogue text, bool ev)
 	{
+		isEvent = ev;
 		displayingText = true;
 		foreach (string i in text.dialogue) paragraph.Enqueue(i);
 		//NextSentence();
@@ -68,6 +77,22 @@ public class TextScrolling : MonoBehaviour
 			scrollSentence = fullSentence = string.Empty;
 			displayingText = false;
 			unPauseOnce = true;
+			isEvent = false;
+			HideSelection();
 		}
+	}
+
+	private void ShowSelection()
+	{
+		selection.SetActive(true);
+		Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+	}
+
+	private void HideSelection()
+	{
+		selection.SetActive(false);
+		Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 }

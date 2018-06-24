@@ -15,7 +15,7 @@ public class InteractOverlay : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (GameController.leftClick && img.color.a < 1.0f) img.color = new Color (img.color.r, img.color.g, img.color.b, img.color.a + 0.01f);
-		else if (img.color.a > 0.0f) img.color = new Color (img.color.r, img.color.g, img.color.b, img.color.a - 0.01f);
+		if (GameController.leftClick && img.color.a < 1.0f) img.color = new Color (img.color.r, img.color.g, img.color.b, Mathf.Clamp(img.color.a + Time.unscaledDeltaTime, 0.0f, 1.0f));
+		else if (img.color.a > 0.0f) img.color = new Color (img.color.r, img.color.g, img.color.b, Mathf.Clamp(img.color.a - Time.unscaledDeltaTime, 0.0f, 1.0f));
 	}
 }

@@ -22,8 +22,8 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("escape") && !gameIsPaused) pause.gameObject.SetActive(true);
 	}
 
-    public void PassDialogue(Dialogue pass)
+    public void PassDialogue(Dialogue pass, bool ev)
     {
-        textDisplay.DisplayDialogue(pass);
+        textDisplay.DisplayDialogue(pass, ev);
     }
 }
