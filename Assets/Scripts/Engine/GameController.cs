@@ -6,8 +6,10 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private PauseScreen pause;
     [SerializeField] private TextScrolling textDisplay;
+    private InteractableController currentInteraction;
     public static bool gameIsPaused = false, leftClick = false;
     public static int health = 100;
+    
 	// Use this for initialization
     void Start()
     {
@@ -22,8 +24,14 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("escape") && !gameIsPaused) pause.gameObject.SetActive(true);
 	}
 
-    public void PassDialogue(Dialogue pass, bool ev)
+    public void PassInteraction(InteractableController interaction)
     {
-        textDisplay.DisplayDialogue(pass, ev);
+        currentInteraction = interaction;
+        textDisplay.DisplayDialogue(currentInteraction.ReturnDialogue(), currentInteraction.IsEvent());
+    }
+
+    public void PlayEvent()
+    {
+        currentInteraction.StartEvent();
     }
 }

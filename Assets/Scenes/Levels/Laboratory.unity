@@ -15359,11 +15359,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4590220802968160, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15395,41 +15390,6 @@ Prefab:
     - target: {fileID: 4590220802968160, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1765698429}
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ShatterGlass
-      objectReference: {fileID: 0}
-    - target: {fileID: 114341381913370172, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114763926529203982, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: minOpacity
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114763926529203982, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: maxOpacity
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
@@ -16659,6 +16619,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5d3da4e309a0f47ae7d98995516db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myUnityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1765698429}
+        m_MethodName: ShatterGlass
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   type: 1
   dialogue:
     dialogue:
@@ -16666,6 +16642,9 @@ MonoBehaviour:
     - 'Will you use it?
 
       Yes No'
+  alternateDialogue:
+    dialogue:
+    - The doors to the laboratory have been unlocked.
 --- !u!65 &1765698426
 BoxCollider:
   m_ObjectHideFlags: 0

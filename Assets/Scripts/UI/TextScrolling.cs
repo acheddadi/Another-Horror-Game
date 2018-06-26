@@ -37,14 +37,23 @@ public class TextScrolling : MonoBehaviour
 				else doneScrolling = true;
 				oldTime = Time.unscaledTime;
 			}
-			if (!isEvent && Input.GetMouseButtonDown(0)) NextSentence();
+			if (!isEvent)
+			{
+				if (Input.GetMouseButtonDown(0) && scrollSentence != fullSentence) scrollSentence = fullSentence;
+				else if (Input.GetMouseButtonDown(0)) NextSentence();
+			}
 			else
 			{
 				if (paragraph.Count == 0)
 				{
-					if (scrollSentence == fullSentence) ShowSelection();
+					if (Input.GetMouseButtonDown(0) && scrollSentence != fullSentence) scrollSentence = fullSentence;
+					else if (scrollSentence == fullSentence) ShowSelection();
 				}
-				else if (Input.GetMouseButtonDown(0)) NextSentence();
+				else
+				{
+					if (Input.GetMouseButtonDown(0) && scrollSentence != fullSentence) scrollSentence = fullSentence;
+					else if (Input.GetMouseButtonDown(0)) NextSentence();
+				}
 			}
 		}
 		else if (unPauseOnce)
@@ -55,9 +64,9 @@ public class TextScrolling : MonoBehaviour
 		textField.text = scrollSentence;
 	}
 
-	public void DisplayDialogue(Dialogue text, bool ev)
+	public void DisplayDialogue(Dialogue text, bool evnt)
 	{
-		isEvent = ev;
+		isEvent = evnt;
 		displayingText = true;
 		foreach (string i in text.dialogue) paragraph.Enqueue(i);
 		//NextSentence();
