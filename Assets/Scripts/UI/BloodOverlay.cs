@@ -23,7 +23,7 @@ public class BloodOverlay : MonoBehaviour
 	{
 		if (direction)
 		{
-			if (img.color.a > 0.5f)
+			if (img.color.a > minOpacity)
 			{
 				float alpha = Mathf.Clamp(img.color.a - minOpacity * Time.deltaTime, minOpacity, maxOpacity);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);
@@ -32,7 +32,7 @@ public class BloodOverlay : MonoBehaviour
 		}
 		else
 		{
-			if (img.color.a < 0.8f)
+			if (img.color.a < maxOpacity)
 			{
 				float alpha = Mathf.Clamp(img.color.a + minOpacity * Time.deltaTime, minOpacity, maxOpacity);
 				img.color = new Color(1.0f, 1.0f, 1.0f, alpha);

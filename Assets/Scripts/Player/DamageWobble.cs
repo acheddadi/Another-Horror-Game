@@ -15,7 +15,7 @@ public class DamageWobble : MonoBehaviour
 	void Start()
 	{
 		cam = Camera.main;
-		player = GetComponent<PlayerController>();
+		player = GetComponentInParent<PlayerController>();
 		source = GetComponent<AudioSource>();
 	}
 

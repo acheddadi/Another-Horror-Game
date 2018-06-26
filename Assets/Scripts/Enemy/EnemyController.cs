@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
 	[SerializeField]private int health = 90, staggerDamage = 30, criticalMultiplier = 3;
-	[SerializeField]private float wanderDistance = 5.0f, recurringTimer = 5.0f;
+	[SerializeField]private float wanderDistance = 10.0f, recurringTimer = 5.0f;
 	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
 	[SerializeField]private AudioClip[] idleClips, attackClips, attractClips, staggerClips, deathClips;
@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 	private NavMeshAgent nav;
 	private float timer, speed, accel, lastAttack, velocity = 0.0f, velocity2 = 0.0f, smoothTime = 0.3f;
 	private Vector3 randomPos;
-	private bool isRunning = false, isStaggered = false, isAttacking = false, playedOnce = false;
+	private bool isRunning = false, isStaggered = false, isAttacking = false, playedOnce = false, spotted = false;
 	private int builtUpDamage = 0;
 
 	// Use this for initialization
@@ -83,7 +83,13 @@ public class EnemyController : MonoBehaviour
 		Vector3 otherDir = other.transform.position - transform.position;
 		Physics.Raycast(transform.position, otherDir, out info, Mathf.Infinity);
 		PlayerController player = info.transform.GetComponent<PlayerController>();
-		if (player != null && !isStaggered) Attract(player.transform.position);
+		if (player != null && !isStaggered)
+		{
+			Attract(player.transform.position);
+			spotted = true;
+		}
+		else if (spotted) StartCoroutine(LostPlayer());
+		
 	}
 
 	void OnTriggerExit(Collider other)
@@ -176,6 +182,19 @@ public class EnemyController : MonoBehaviour
 			source.clip = clipToPlay[rndNmb];
 			source.pitch = Random.Range(0.8f, 1.2f);
 			source.Play();
+		}
+	}
+
+	private IEnumerator LostPlayer()
+	{
+		spotted = false;
+		float timer = 0.0f;
+		while (timer < 1.0f)
+		{
+			timer += Time.deltaTime;
+			PlayerController player = FindObjectOfType<PlayerController>();
+			if (player != null) Attract(player.transform.position);
+			yield return null;
 		}
 	}
 }

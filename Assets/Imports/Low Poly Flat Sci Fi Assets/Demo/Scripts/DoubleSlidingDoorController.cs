@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DoubleSlidingDoorController : MonoBehaviour
 {
-	[SerializeField] private AudioClip doorOpeningSoundClip, doorClosingSoundClip, doorAccessDeniedClip;
-	[SerializeField] private Transform halfDoorLeftTransform, halfDoorRightTransform;	//	Left panel of the sliding door
-	[SerializeField] private float slideDistance = 0.88f, speed = 1f;
-	[SerializeField] private enum DoubleSlidingDoorStatus { Closed, Open, Animating, Locked }
-	[SerializeField] private Renderer doorPanel;
-	[SerializeField] private bool locked;
+	[SerializeField]private AudioClip doorOpeningSoundClip, doorClosingSoundClip, doorAccessDeniedClip;
+	[SerializeField]private Transform halfDoorLeftTransform, halfDoorRightTransform;	//	Left panel of the sliding door
+	[SerializeField]private float slideDistance = 0.88f, speed = 1f;
+	[SerializeField]private enum DoubleSlidingDoorStatus { Closed, Open, Animating, Locked }
+	[SerializeField]private Renderer doorPanel;
+	[SerializeField]private bool locked;
 	
 	private DoubleSlidingDoorStatus status;
 	private Vector3 leftDoorClosedPosition, leftDoorOpenPosition, rightDoorClosedPosition, rightDoorOpenPosition;
@@ -54,12 +54,12 @@ public class DoubleSlidingDoorController : MonoBehaviour
 			else if (status == DoubleSlidingDoorStatus.Locked) StartCoroutine(AccessDenied());
 		}
 
-		if (other.GetComponent<Collider>().gameObject.layer == LayerMask.NameToLayer ("Player")) objectsOnDoorArea++;
+		if (other.GetComponent<PlayerController>() != null || other.GetComponentInParent<EnemyTag>() != null) objectsOnDoorArea++;
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.GetComponent<Collider>().gameObject.layer == LayerMask.NameToLayer ("Player")) objectsOnDoorArea--;
+		if (other.GetComponent<PlayerController>() != null || other.GetComponentInParent<EnemyTag>() != null) objectsOnDoorArea--;
 	}
 
 	private IEnumerator OpenDoors ()
