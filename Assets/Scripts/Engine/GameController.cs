@@ -6,8 +6,9 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private PauseScreen pause;
     [SerializeField] private TextScrolling textDisplay;
+    [SerializeField]private AudioSource enemyMusic;
     private InteractableController currentInteraction;
-    public static bool gameIsPaused = false, leftClick = false;
+    public static bool gameIsPaused = false, leftClick = false, chasingPlayer = false;
     public static int health = 100;
     
 	// Use this for initialization
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
         if (gameIsPaused) Time.timeScale = 0.0f;
         else Time.timeScale = 1.0f;
         if (Input.GetKeyDown("escape") && !gameIsPaused) pause.gameObject.SetActive(true);
+        if (chasingPlayer && enemyMusic.volume < 1.0f) enemyMusic.volume = Mathf.Clamp(enemyMusic.volume + Time.deltaTime, 0.0f, 1.0f);
+        else if (!chasingPlayer && enemyMusic.volume > 0.0f) enemyMusic.volume = Mathf.Clamp(enemyMusic.volume - Time.deltaTime, 0.0f, 1.0f);
 	}
 
     public void PassInteraction(InteractableController interaction)

@@ -3257,7 +3257,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3375,7 +3375,7 @@ MonoBehaviour:
   slideDistance: 0.88
   speed: 1
   doorPanel: {fileID: 1482052382}
-  locked: 0
+  locked: 1
 --- !u!1001 &381663274
 Prefab:
   m_ObjectHideFlags: 0
@@ -5234,7 +5234,8 @@ AudioSource:
   m_GameObject: {fileID: 524363555}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243935551386249192, guid: 4f295423bfb66314a90452c6fbfcbb7a,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bc60016c2d0293c4096e8fac079594af, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.8
@@ -6148,7 +6149,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7366,7 +7367,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7879,7 +7880,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15395,11 +15396,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82805989578588814, guid: 7e2f21c6a74015f4eaec209fc6846950,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6a5cda167babdb043838333707a298ea, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
   m_IsPrefabParent: 0
@@ -16731,7 +16727,7 @@ AudioSource:
   m_GameObject: {fileID: 1765698423}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243935551386249192, guid: 4f295423bfb66314a90452c6fbfcbb7a,
+  OutputAudioMixerGroup: {fileID: 243188820631254218, guid: 4f295423bfb66314a90452c6fbfcbb7a,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 0a9c1672a06251a4d81838c420ead4b7, type: 3}
   m_PlayOnAwake: 0
@@ -22437,7 +22433,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23541,7 +23537,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23659,7 +23655,7 @@ MonoBehaviour:
   slideDistance: 0.88
   speed: 1
   doorPanel: {fileID: 1306354990}
-  locked: 0
+  locked: 1
 --- !u!1 &2087135051
 GameObject:
   m_ObjectHideFlags: 0

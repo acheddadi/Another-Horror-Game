@@ -53,6 +53,7 @@ public class EnemyController : MonoBehaviour
 				ref velocity2, smoothTime
 			);
 			anime.SetFloat("Speed", animSpd);
+			GameController.chasingPlayer = true;
 		}
 
 		else
@@ -67,6 +68,7 @@ public class EnemyController : MonoBehaviour
 			);
 			anime.SetFloat("Speed", animSpd);
 			timer -= Time.deltaTime;
+			GameController.chasingPlayer = false;
 		}
 
 		if ((nav.destination - transform.position).magnitude <= nav.stoppingDistance) isRunning = false;
@@ -146,6 +148,7 @@ public class EnemyController : MonoBehaviour
 		List<Transform> children = new List<Transform>();
 		for (int i = 0; i < transform.childCount; i++) children.Add(transform.GetChild(i));
 		foreach (Transform child in children) foreach (Collider col in child.GetComponentsInChildren<Collider>()) col.isTrigger = false;
+		GameController.chasingPlayer = false;
 	}
 
 	private IEnumerator PauseNavigation()
