@@ -5,11 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+	[SerializeField]private bool useWaypoints = false;
+	[SerializeField]private enum Direction { CLOCKWISE, COUNTER_CLOCKWISE }
+	[SerializeField]private Direction waypointDirection = Direction.CLOCKWISE;
+	[SerializeField]private GameObject waypointParent;
 	[SerializeField]private int health = 90, staggerDamage = 30, criticalMultiplier = 3;
 	[SerializeField]private float wanderDistance = 10.0f, recurringTimer = 5.0f;
 	[SerializeField]private float walkSpeed = 1.25f, runMultiplier = 2.0f, acceleration = 7.0f, staggerTime = 1.5f, attackFrequency = 2.0f;
 	[SerializeField]private Collider criticalHit;
 	[SerializeField]private AudioClip[] idleClips, attackClips, attractClips, staggerClips, deathClips;
+	private Transform[] waypoints;
 	private AudioSource source;
 	private Animator anime;
 	private NavMeshAgent nav;
@@ -26,6 +31,17 @@ public class EnemyController : MonoBehaviour
 		nav = GetComponent<NavMeshAgent>();
 		anime.SetFloat("Random Walk", Random.Range(0.0f, 1.0f));
 		lastAttack = Time.time;
+		if (waypointParent == null)
+		{
+			waypoints = new Transform[1];
+			waypoints[0] = transform;
+		}
+		else
+		{
+			Transform[] temp = waypointParent.GetComponentsInChildren<Transform>();
+			waypoints = new Transform[temp.Length - 1];
+			for (int i = 1; i < temp.Length; i++) waypoints[i - 1] = temp[i];
+		}
 	}
 	
 	// Update is called once per frame
@@ -33,12 +49,38 @@ public class EnemyController : MonoBehaviour
 	{
 		if (timer < 0 && !isRunning && !isStaggered)
 		{
-			do
+			if (!useWaypoints)
 			{
-				randomPos = Random.insideUnitCircle * wanderDistance;
-				randomPos.z = randomPos.y; randomPos.y = 0.0f;
-				randomPos += transform.position;
-			} while (!nav.SetDestination(randomPos));
+				do
+				{
+					randomPos = Random.insideUnitCircle * wanderDistance;
+					randomPos.z = randomPos.y; randomPos.y = 0.0f;
+					randomPos += transform.position;
+				} while (!nav.SetDestination(randomPos));
+			}
+			else
+			{
+				int closestWaypoint = 0;
+				float smallestDistance = Vector3.Distance(transform.position, waypoints[closestWaypoint].position);
+				for (int i = 0; i < waypoints.Length; i++)
+				{
+					if (smallestDistance > Vector3.Distance(transform.position, waypoints[i].position))
+					{
+						closestWaypoint = i;
+						smallestDistance = Vector3.Distance(transform.position, waypoints[i].position);
+					}
+				}
+				if (waypointDirection == Direction.CLOCKWISE)
+				{
+					if (closestWaypoint == waypoints.Length - 1) nav.SetDestination(waypoints[0].position);
+					else nav.SetDestination(waypoints[closestWaypoint + 1].position);
+				}
+				else if (waypointDirection == Direction.COUNTER_CLOCKWISE)
+				{
+					if (closestWaypoint == 0) nav.SetDestination(waypoints[waypoints.Length - 1].position);
+					else nav.SetDestination(waypoints[closestWaypoint - 1].position);
+				}
+			}
 			timer = recurringTimer;
 		}
 
