@@ -49,6 +49,7 @@ public class EnemyController : MonoBehaviour
 	{
 		if (timer < 0 && !isRunning && !isStaggered)
 		{
+			GameController.chasingPlayer = false;
 			if (!useWaypoints)
 			{
 				do
@@ -86,6 +87,7 @@ public class EnemyController : MonoBehaviour
 
 		if (isRunning)
 		{
+			GameController.chasingPlayer = true;
 			speed = walkSpeed * runMultiplier;
 			accel = acceleration * runMultiplier;
 			float animSpd = Mathf.SmoothDamp
@@ -95,7 +97,6 @@ public class EnemyController : MonoBehaviour
 				ref velocity2, smoothTime
 			);
 			anime.SetFloat("Speed", animSpd);
-			GameController.chasingPlayer = true;
 		}
 
 		else
@@ -110,7 +111,6 @@ public class EnemyController : MonoBehaviour
 			);
 			anime.SetFloat("Speed", animSpd);
 			timer -= Time.deltaTime;
-			GameController.chasingPlayer = false;
 		}
 
 		if ((nav.destination - transform.position).magnitude <= nav.stoppingDistance) isRunning = false;
