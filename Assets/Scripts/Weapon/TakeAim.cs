@@ -5,6 +5,8 @@ using UnityEngine;
 public class TakeAim : MonoBehaviour
 {
 	[SerializeField]private float fireRate = 0.1f, recoilAmount = 1.0f;
+	[SerializeField]private int clipSize = 10;
+	[SerializeField]private AudioClip outOfAmmo;
 	private Animator anime;
 	private CameraController camRot;
 	private Camera cam;
@@ -12,7 +14,7 @@ public class TakeAim : MonoBehaviour
 	private FireProjectile fireProjectile;
 	private float initZoom, velocity = 0.0f, smoothTime = 0.1f, lastShot = 0.0f;
 	private bool recoiling = false, letGo = true;
-	private int lastClick;
+	private int lastClick, currentAmmo = 10;
 
 	// Use this for initialization
 	void Start ()
@@ -44,13 +46,18 @@ public class TakeAim : MonoBehaviour
 					AnimatorStateInfo nextInfo = anime.GetNextAnimatorStateInfo(0);
 					if ((info.normalizedTime > 1.0f) && (nextInfo.normalizedTime == 0.0f) && (info.IsName("Base.PointGun")) && (lastClick == 0))
 					{
+						if (currentAmmo > 0)
+						{
 						fireProjectile.Fire();
 						anime.SetTrigger("LeftClick");
 						StartCoroutine(RecoilCamera());
 						sfx.pitch = Random.Range(0.9f, 1.1f);
 						sfx.Play();
-						lastShot = 0.0f;
+						currentAmmo--;
+						}
+						else sfx.PlayOneShot(outOfAmmo);
 						letGo = false;
+						lastShot = 0.0f;
 					}
 				}
 			}
@@ -88,5 +95,13 @@ public class TakeAim : MonoBehaviour
 			}
 			recoiling = false;
 		}
+	}
+
+	public int ReloadAmmo(int ammo)
+	{
+		int ammoToTake = clipSize - ammo;
+		currentAmmo += ammoToTake;
+		ammo -= ammoToTake;
+		return ammo;
 	}
 }

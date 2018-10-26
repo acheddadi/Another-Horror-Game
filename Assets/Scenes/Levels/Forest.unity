@@ -2135,6 +2135,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82805989578588814, guid: 7e2f21c6a74015f4eaec209fc6846950,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d651a18e13c1484fb713ea935f8e574, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e2f21c6a74015f4eaec209fc6846950, type: 2}
   m_IsPrefabParent: 0
@@ -2403,7 +2408,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 0.2707369, g: 0.36746174, b: 0.49056602, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.75
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
