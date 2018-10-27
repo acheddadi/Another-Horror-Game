@@ -6,14 +6,14 @@ public class TakeAim : MonoBehaviour
 {
 	[SerializeField]private float fireRate = 0.1f, recoilAmount = 1.0f;
 	[SerializeField]private int clipSize = 10;
-	[SerializeField]private AudioClip outOfAmmo;
+	[SerializeField]private AudioClip outOfAmmo, reload;
 	private Animator anime;
 	private CameraController camRot;
 	private Camera cam;
 	private AudioSource sfx;
 	private FireProjectile fireProjectile;
 	private float initZoom, velocity = 0.0f, smoothTime = 0.1f, lastShot = 0.0f;
-	private bool recoiling = false, letGo = true;
+	private bool recoiling = false, letGo = true, reloadRequest = false;
 	private int lastClick, currentAmmo = 10;
 
 	// Use this for initialization
@@ -32,9 +32,11 @@ public class TakeAim : MonoBehaviour
 	{
 		if (!GameController.gameIsPaused)
 		{
+			AnimatorStateInfo info = anime.GetCurrentAnimatorStateInfo(0);
+			AnimatorStateInfo nextInfo = anime.GetNextAnimatorStateInfo(0);
 			if (Input.GetMouseButtonDown(0)) lastClick = 0;
 			if (Input.GetMouseButtonDown(1)) lastClick = 1;
-			if (Input.GetMouseButton(1))
+			if (Input.GetMouseButton(1) && !info.IsName("Base.ReloadGun") && !nextInfo.IsName("Base.ReloadGun") && !reloadRequest)
 			{
 				anime.SetBool("RightClick", true);
 				camRot.FPS(true);
@@ -42,8 +44,6 @@ public class TakeAim : MonoBehaviour
 				
 				if (Input.GetMouseButton(0) && (lastShot > fireRate) && letGo)
 				{
-					AnimatorStateInfo info = anime.GetCurrentAnimatorStateInfo(0);
-					AnimatorStateInfo nextInfo = anime.GetNextAnimatorStateInfo(0);
 					if ((info.normalizedTime > 1.0f) && (nextInfo.normalizedTime == 0.0f) && (info.IsName("Base.PointGun")) && (lastClick == 0))
 					{
 						if (currentAmmo > 0)
@@ -66,9 +66,20 @@ public class TakeAim : MonoBehaviour
 				anime.SetBool("RightClick", false);
 				camRot.FPS(false);
 				cam.fieldOfView = Mathf.SmoothDamp(cam.fieldOfView, initZoom, ref velocity, smoothTime);
+				if (reloadRequest)
+				{
+					if (info.IsName("Base.Idle"))
+					{
+						ReloadAmmo(10);
+						anime.SetTrigger("Reload");
+						sfx.PlayOneShot(reload);
+						reloadRequest = false;
+					}
+				}
 			}
 			if (Input.GetMouseButtonUp(0)) letGo = true;
 			lastShot += Time.deltaTime;
+			if (Input.GetKey(KeyCode.R) && (currentAmmo < clipSize)) reloadRequest = true;
 		}
 	}
 
@@ -99,7 +110,7 @@ public class TakeAim : MonoBehaviour
 
 	public int ReloadAmmo(int ammo)
 	{
-		int ammoToTake = clipSize - ammo;
+		int ammoToTake = clipSize - currentAmmo;
 		currentAmmo += ammoToTake;
 		ammo -= ammoToTake;
 		return ammo;
