@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
 	void Start ()
 	{
 		cameraPosition = GetComponent<Transform>();
+        deltaX = cameraPosition.localEulerAngles.y;
+        deltaY = cameraPosition.localEulerAngles.x;
 	}
 	
 	// Update is called once per frame

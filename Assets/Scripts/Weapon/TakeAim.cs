@@ -55,7 +55,7 @@ public class TakeAim : MonoBehaviour
 						sfx.Play();
 						currentAmmo--;
 						}
-						else sfx.PlayOneShot(outOfAmmo);
+						else sfx.PlayOneShot(outOfAmmo, 0.5f);
 						letGo = false;
 						lastShot = 0.0f;
 					}
@@ -72,7 +72,7 @@ public class TakeAim : MonoBehaviour
 					{
 						ReloadAmmo(10);
 						anime.SetTrigger("Reload");
-						sfx.PlayOneShot(reload);
+						sfx.PlayOneShot(reload, 0.5f);
 						reloadRequest = false;
 					}
 				}
